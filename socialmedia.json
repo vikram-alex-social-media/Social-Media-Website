@@ -1,0 +1,35 @@
+{
+  "tweets" : {
+    "m1SZOkQ93xR8IoOcxtWnaF0nibq0" : {
+      "-LWY3zmdKbRcdefIm8_x" : {
+        "tweet" : "Hello ?"
+      }
+    },
+    "vUvDYGiZxcaweMf5qWeMTeAXfYl0" : {
+      "-LWS4PcSY-vBweXXrSXA" : {
+        "tweet" : "this is an example"
+      },
+      "-LWSC4Ckltenibn6jpZf" : {
+        "tweet" : "hi"
+      },
+      "-LWSCQZQ9fe-2VRFBCUE" : {
+        "tweet" : "swank\n"
+      },
+      "-LWY58OxulaANTFnzODh" : {
+        "tweet" : "Hi David"
+      }
+    }
+  },
+  "users" : {
+    "m1SZOkQ93xR8IoOcxtWnaF0nibq0" : {
+      "email" : "dcrawford@ucc.on.ca",
+      "profile_picture" : "https://lh3.googleusercontent.com/-rI-udG5swZA/AAAAAAAAAAI/AAAAAAAAI2w/V7AqUC9xr24/photo.jpg",
+      "username" : "David Crawford"
+    },
+    "vUvDYGiZxcaweMf5qWeMTeAXfYl0" : {
+      "email" : "mhoel@ucc.on.ca",
+      "profile_picture" : "https://lh6.googleusercontent.com/-l2NF69h4UG4/AAAAAAAAAAI/AAAAAAAACzw/V1pCOyunEko/photo.jpg",
+      "username" : "Mark Hoel"
+    }
+  }
+}

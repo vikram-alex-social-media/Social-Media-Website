@@ -1,0 +1,144 @@
+
+<html>
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
+    <script>
+        // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCX6CFF8lru1u-486F1ohYeGJCKJsJPBGA",
+        authDomain: "vikram-alex-social-media.firebaseapp.com",
+        databaseURL: "https://vikram-alex-social-media.firebaseio.com",
+        projectId: "vikram-alex-social-media",
+        storageBucket: "vikram-alex-social-media.appspot.com",
+        messagingSenderId: "93999758685"
+    };
+        firebase.initializeApp(config);
+                
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                alert("Not logged in.");
+                return;
+            } else {
+                userId = user.uid;
+                name = user.displayName;
+                imageUrl = user.photoURL;
+                email = user.email;
+                    
+                // write user data to users
+                writeUserData(userId, name, email, imageUrl);
+                
+                // write data to document
+                mydiv = document.getElementById("mydata");
+                mydiv.innerHTML = name
+                myphotodiv = document.getElementById("myphoto");
+                myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
+
+                firebase.database().ref('/').once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /tweets");  
+                    } else {
+                      /*
+                      console.log(data); 
+                      var mylist = "<ul>";
+                      for (var u in data) {
+                         console.log(data[u]);
+                         for (var t in data[u]) {
+                            console.log(data[u][t].tweet);
+                            mylist = mylist + "<li>" + data[u][t].tweet + "</li>";
+                         } 
+                      }
+                      mylist = mylist + "</ul>";
+                        console.log(mylist);
+                      var mytdiv = document.getElementById("mytweets");
+                      mytdiv.innerHTML = mylist;
+                      */
+                      updatetweets(data);
+                    }
+                });
+            } // end user null check
+        }); // end check auth state
+        
+        // write user data
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).set({
+                username: name,
+                email: email,
+                profile_picture : imageUrl
+            });
+        }
+        
+        function updatetweets(data) {
+            console.log(data); 
+            var mylist = "<ul>";
+            for (var u in data.tweets) {
+                console.log(data[u]);
+                for (var t in data.tweets[u]) {
+                    console.log(data.tweets[u][t].tweet);
+                    mylist = mylist + "<li>" + data.tweets[u][t].tweet + " (" + data.users[u].email + ")</li>";
+                } 
+            }
+            mylist = mylist + "</ul>";
+            console.log(mylist);
+            var mytdiv = document.getElementById("mytweets");
+            mytdiv.innerHTML = mylist;
+        }
+        
+        // write tweets to firebase
+        function tweet() {
+            
+            twitdoc = document.getElementById("twit");
+            var nameValue = twitdoc.value;
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue});
+            twitdoc.value = "";
+            console.log("tweet written")
+            
+            firebase.database().ref().once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /tweets");  
+                    } else {
+                      updatetweets(data);
+                    }
+                });
+            
+            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
+            
+        }
+        
+        
+        function signin() {
+            console.log("Signing in");
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) {  
+            });
+        }
+        
+        function signout() {
+            console.log("Signing out");
+            firebase.auth().signOut().then(function() {
+            });
+        }
+    
+    </script>
+
+    <body>
+        <button onclick="signin()">Sign in</button>
+        <button onclick="signout()">Sign out</button>
+    
+        <form>
+            Tweet:<br>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
+        </form> 
+        <button type="button" onclick="tweet()">Submit</button>
+    
+    <div id="mytweets"></div>
+    <div id="mydata"></div>
+    <div id="myphoto"></div>
+    </body>
+
+    
+</html>
