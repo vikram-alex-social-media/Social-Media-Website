@@ -1,18 +1,18 @@
 
 <html>
 
-    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     
     <script>
         // Initialize Firebase
     var config = {
-        apiKey: "AIzaSyCX6CFF8lru1u-486F1ohYeGJCKJsJPBGA",
-        authDomain: "vikram-alex-social-media.firebaseapp.com",
-        databaseURL: "https://vikram-alex-social-media.firebaseio.com",
-        projectId: "vikram-alex-social-media",
-        storageBucket: "vikram-alex-social-media.appspot.com",
-        messagingSenderId: "93999758685"
+        apiKey: "AIzaSyBH2c82Y7YT23PdZC_V-XnBCRU4oIMO61I",
+        authDomain: "test-5d427.firebaseapp.com",
+        databaseURL: "https://test-5d427.firebaseio.com",
+        projectId: "test-5d427",
+        storageBucket: "test-5d427.appspot.com",
+        messagingSenderId: "114560243354"
     };
         firebase.initializeApp(config);
                 
@@ -26,6 +26,7 @@
                 name = user.displayName;
                 imageUrl = user.photoURL;
                 email = user.email;
+                alert("Logged In.");
                     
                 // write user data to users
                 writeUserData(userId, name, email, imageUrl);
@@ -115,12 +116,14 @@
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider).then(function(result) {  
             });
+            alert("Logged In")
         }
         
         function signout() {
             console.log("Signing out");
             firebase.auth().signOut().then(function() {
             });
+            alert("Logged Out")
         }
     
     </script>
