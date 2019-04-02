@@ -1,7 +1,7 @@
 
 <html>
 
-    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     
     <script>
@@ -26,7 +26,6 @@
                 name = user.displayName;
                 imageUrl = user.photoURL;
                 email = user.email;
-                alert("Logged In.");
                     
                 // write user data to users
                 writeUserData(userId, name, email, imageUrl);
@@ -37,7 +36,7 @@
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
 
-                firebase.database().ref('/').once('value').then(function(snapshot) {
+                firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
                       console.log("No data found at /tweets");  
@@ -75,11 +74,10 @@
         function updatetweets(data) {
             console.log(data); 
             var mylist = "<ul>";
-            for (var u in data.tweets) {
-                console.log(data[u]);
-                for (var t in data.tweets[u]) {
-                    console.log(data.tweets[u][t].tweet);
-                    mylist = mylist + "<li>" + data.tweets[u][t].tweet + " (" + data.users[u].email + ")</li>";
+            for (var u in data) {
+                var d = new Date(data[u].time);
+                var t = d.toString();
+                mylist = mylist + "<li>" + data[u].tweet + " (" + t + ")</li>";
                 } 
             }
             mylist = mylist + "</ul>";
@@ -93,11 +91,12 @@
             
             twitdoc = document.getElementById("twit");
             var nameValue = twitdoc.value;
+            var js_time = Date.now();
             var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue});
             twitdoc.value = "";
             console.log("tweet written")
             
-            firebase.database().ref().once('value').then(function(snapshot) {
+            firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
                       console.log("No data found at /tweets");  
