@@ -1,20 +1,68 @@
 <html>
 
-    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+<body>
+
+ <div class="myH1">Social Media Example</div>    
+<center>
+ <br>
+ <br>
+ 
+        <button onclick="signin()">Sign in</button>
+        <button onclick="signout()">Sign out</button>
     
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyCToq81cnSSBKbmXS3cmmgjd7ve9h13gpw",
-            authDomain: "va-social-media.firebaseapp.com",
-            databaseURL: "https://va-social-media.firebaseio.com",
-            projectId: "va-social-media",
-            storageBucket: "va-social-media.appspot.com",
-            messagingSenderId: "211228920799"
-        };
-        firebase.initializeApp(config);
+        <form>
+            Tweet:<br>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
+        </form> 
+        <button type="button" onclick="tweet()">Submit</button>
+    
+    <div id="mytweets"></div>
+    <div id="mydata"></div>
+
+ </center>
+    
+    
+    
+</body>
+
+    
+    
+<style>
+    
+    @import url('https://fonts.googleapis.com/css?family=Prompt');    
+    
+body {
+    background-color: lightgrey;
+    margin: 0;
+}
+    
+div.myH1 {
+    font-family: 'Prompt', sans-serif;
+    color: aliceblue;
+    font-size: 60px;
+    text-align: center;
+    background-color: lightgreen;
+    top: 10%;
+    left: 50%
+}
+    
+</style>
+
+    
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+        apiKey: "AIzaSyCToq81cnSSBKbmXS3cmmgjd7ve9h13gpw",
+        authDomain: "va-social-media.firebaseapp.com",
+        databaseURL: "https://va-social-media.firebaseio.com",
+        projectId: "va-social-media",
+        storageBucket: "va-social-media.appspot.com",
+        messagingSenderId: "211228920799"
+  };
+  firebase.initializeApp(config);
                 
+    
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
@@ -34,13 +82,11 @@
                 mydiv.innerHTML = name
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
-
-                firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
+                firebase.database().ref('/').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
-                      console.log("No data found at /tweets/");  
+                      console.log("No data found at /tweets");  
                     } else {
-                      console.log(data);
                       /*
                       console.log(data); 
                       var mylist = "<ul>";
@@ -74,12 +120,15 @@
         function updatetweets(data) {
             console.log(data); 
             var mylist = "<ul>";
-            for (var u in data) {
-                var d = new Date(data[u].time);
-                var t = d.toString();
-                mylist = mylist + "<li>" + data[u].tweet + " (" + t + ")</li>";
+            for (var u in data.tweets) {
+                console.log(data[u]);
+                for (var t in data.tweets[u]) {
+                    console.log(data.tweets[u][t].tweet);
+                    mylist = mylist + "<li>" + data.tweets[u][t].tweet + " (" + data.users[u].email + ")</li>";
+                } 
             }
             mylist = mylist + "</ul>";
+            console.log(mylist);
             var mytdiv = document.getElementById("mytweets");
             mytdiv.innerHTML = mylist;
         }
@@ -89,8 +138,7 @@
             
             twitdoc = document.getElementById("twit");
             var nameValue = twitdoc.value;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time});
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue});
             twitdoc.value = "";
             console.log("tweet written")
             
@@ -121,22 +169,11 @@
             });
         }
     
-    </script>
+    </script>    
+    
+    
+    
+    
+    
+</html
 
-    <body>
-        <button onclick="signin()">Sign in</button>
-        <button onclick="signout()">Sign out</button>
-    
-        <form>
-            Tweet:<br>
-            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
-        </form> 
-        <button type="button" onclick="tweet()">Submit</button>
-    
-    <div id="mytweets"></div>
-    <div id="mydata"></div>
-    <div id="myphoto"></div>
-    </body>
-
-    
-</html>
