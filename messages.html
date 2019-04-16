@@ -3,13 +3,14 @@
 <head>
     
 <link href="https://fonts.googleapis.com/css?family=Exo+2:500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Exo+2:300" rel="stylesheet">
     
 <body>
 
 <div id="datetime"></div>
 <center>
     
-  <div class="topnav">
+  <div class="topnav" margin="0">
   <a class="active" href="index.html">Home</a>
   <a href="posts.html">Posts</a>
   <a href="messages.html">Messages</a>
@@ -22,26 +23,19 @@
     
     
 </div>
-         
+
+    
 <br>
- 
-<button id="signin" onclick="signin()">Sign in</button>
-<button id="signout" onclick="signout()">Sign out</button>
+<br>
     
-    <form>
-        Tweet Here:
-        <br>
-        <br>
-        <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
-    </form> 
-    <button type="button" onclick="tweet();">Submit</button>
-    <br>
-    <br>
-    
+    <h3 style="font-family: ">My Messages</h3>
+
     <div id="mytweets"></div>
     <div id="mydata"></div>
 
  </center>
+    
+
     
     
     
@@ -93,7 +87,7 @@
 }
     
     div.myH1 {
-        font-family: Comic Sans MS;
+        font-family: 'Exo 2', sans-serif;
         color: aliceblue;
         font-size: 60px;
         text-align: center;
@@ -175,43 +169,6 @@
                 email: email,
                 profile_picture : imageUrl
             });
-        }
-           
-    
-        function updatetweets(data) {
-            var mylist = "<ul>";
-            for (var u in data) {
-                var d = new Date(data[u].time);
-                var t = d.toString();
-                mylist = mylist + "<li>" + data[u].tweet + " (" + t + ")</li>";
-            }
-            mylist = mylist + "<ul>";
-            var mytdiv = document.getElementById("mytweets");
-            mytdiv.innerHTML = mylist;
-                
-            }
-        
-        // write tweets to firebase
-        function tweet() {
-            
-            twitdoc = document.getElementById("twit");
-            var nameValue = twitdoc.value;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time});
-            twitdoc.value = "";
-            console.log("tweet written");
-            
-            firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
-                    var data = (snapshot.val());
-                    if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
-                    } else {
-                      updatetweets(data);
-                    }
-                });
-            
-            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
-            
         }
         
         
