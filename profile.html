@@ -17,15 +17,13 @@
   <a href="contactus.html">Contact Us</a>
   <a href="about.html">About</a>
       
-
-      
-    
-    
 </div>
 
     
 <br>
 <br>
+
+<img src="logo.png" style="width: 85px; height: 50px; margin-left: 1200px;">
     
 
     
@@ -76,7 +74,7 @@
 
     .topnav a:hover {
         background-color: #ddd;
-        color: black;
+        color: blue;
     }
 
     .topnav a.active {
@@ -138,6 +136,7 @@
                 imageUrl = user.photoURL;
                 email = user.email;
                 document.getElementById('profilepicture').innerHTML = "<img class=profileimage src='" + imageUrl + "'/>";
+                
                     
                 // write user data to users
                 writeUserData(userId, name, email, imageUrl);

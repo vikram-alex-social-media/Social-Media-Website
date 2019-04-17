@@ -10,17 +10,33 @@
 <center>
     
   <div class="topnav">
-  <a class="active" href="index.html">Home</a>
-  <a href="posts.html">Posts</a>
-  <a href="messages.html">Messages</a>
-  <a href="profile.html">Profile</a>
-  <a href="contactus.html">Contact Us</a>
-  <a href="about.html">About</a>
-      
-
-      
-    
-    
+    <a class="active" href="index.html">Home</a>
+    <a href="posts.html">Posts</a>
+    <a href="messages.html">Messages</a>
+    <a href="profile.html">Profile</a>
+    <a href="contactus.html">Contact Us</a>
+    <a href="about.html">About</a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <a href="about.html" style="visibility: hidden"></a>
+    <img src="logo.png" style="width: 85px; height: 48px; align-content: right;">    
 </div>
          
 <br>
@@ -140,6 +156,11 @@
                 mydiv.innerHTML = name
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
+                user.sendEmailVerification().then(function() {
+                // Email sent.
+                }).catch(function(error) {
+                // An error happened.
+                });
                 
                 firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
                     var data = (snapshot.val());
