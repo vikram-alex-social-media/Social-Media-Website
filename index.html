@@ -1,258 +1,274 @@
 <html>
 
-<head>
-    
-<link href="https://fonts.googleapis.com/css?family=Exo+2:500" rel="stylesheet">
-    
 <body>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa|Nunito+Sans" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sign up | QuikChat</title>
+    </head>   
+    
+<div class="rightSide">
+    <div class="myLogo"><img src="BlankQCLogo.png" width="250" height="140.6" alt="Blank Q"></div>
+    
+    <div class="mainDescription">Communicate with friends, family, or anyone else quickly using QuikChat</div>
 
-<div id="datetime"></div>
-<center>
+    <div class="joinToday">Join QuikChat today.</div>
     
-  <div class="topnav">
-    <a class="active" href="index.html">Home</a>
-    <a href="posts.html">Posts</a>
-    <a href="messages.html">Messages</a>
-    <a href="profile.html">Profile</a>
-    <a href="contactus.html">Contact Us</a>
-    <a href="about.html">About</a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <a href="about.html" style="visibility: hidden"></a>
-    <img src="logo.png" style="width: 85px; height: 48px; align-content: right;">    
-</div>
-         
-<br>
- 
-<button id="signin" onclick="signin()">Sign in</button>
-<button id="signout" onclick="signout()">Sign out</button>
+    <a href="home.html">
+        <button class="btn fourth">Sign in with Google</button>
+    </a>
+        
     
-    <form>
-        Tweet Here:
-        <br>
-        <br>
-        <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
-    </form> 
-    <button type="button" onclick="tweet();">Submit</button>
-    <br>
-    <br>
-    
-    <div id="mytweets"></div>
-    <div id="mydata"></div>
+    <a href="https://accounts.google.com/signup">
+        <button class="btn2 fourth">Create an account</button>
+    </a>
 
- </center>
+    </div>
+
     
+    <div class="myLogo">
+        <img src="BlankQCLogo.png" alt="Land" style="width:100%">
+    </div> 
     
+<div class="leftSide">
+    <div class="leftPoints">
+        <p>Chat with a friend or in groups</p><br><p>Share what's new</p><br><p>Stay in touch all the time</p><br>
+    </div>
+    
+    <div class="leftLogo">
+        <img src="HRQCL.svg" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:100%">
+    </div>
+    
+    <div class="textIcon">
+        <img src="textIcon.png" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:9%">
+    </div>
+    
+     <div class="shareIcon">
+        <img src="shareIcon.png" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:9%">
+    </div>
+    
+     <div class="beaconIcon">
+        <img src="beaconIcon.png" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:9%">
+    </div>
+    
+    </div>
+
+
+
+  
     
 </body>
+    
 
     
     
 <style>
     
-    body {
-        font-family: 'Exo 2', sans-serif;
+   @import url('https://fonts.googleapis.com/css?family=Comfortaa:400,600,700|Nunito+Sans:400,700,800,900');
+    
+    div.rightSide {
+        background-color: ghostwhite;
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0%;
+        left: 50%;
     }
     
-    #signin {
-        margin-left: 0px;
+    div.leftSide {
+        background-color: #ADFBC9;
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+    }
+     
+    
+    div.leftPoints {
+        color: white;
+        font-family: 'Comfortaa', sans-serif;
+        text-align: left;
+        font-weight: 700;
+        font-size: 1.3em;
+        font-weight: 500;
+        position: absolute;
+        top: 50%;
+        left: 53%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
     }
     
-    #signout {
-        margin-left: 1200px;
+    
+    br {
+        line-height: -500px;
     }
-
-    .topnav {
-    overflow: hidden;
-    background-color: #333;
-        
-    }   
-
-    .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+    
+    div.joinToday {
+        color: #90ee90;
+        font-family: 'Comfortaa', sans-serif;
+        text-align: left;
+        font-weight: 900;
+        font-size: 1.3em;
+        position: absolute;
+        top: 51%;
+        left: 10%;
     }
-
-    .topnav a:hover {
-        background-color: #ddd;
+    
+    div.mainDescription {
         color: black;
-    }
-
-    .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
+        font-family: 'Comfortaa', sans-serif;
+        text-align: left;
+        font-weight: 600;
+        font-size: 1.7em;
+        width: 80%;
+        position: absolute;
+        top: 35%;
+        left: 10%;
     }
     
-    background-color: whitesmoke;
-    margin: 0;
+    
+    div.myLogo {
+        width: 1%;
+        position: absolute;
+        top: 22%;
+        left: 5.7%;
+    }
+    
+    div.leftLogo {
+        width: 135%;
+        position: absolute;
+        top: 22%;
+        left: -30%;
+    }
+    
+    div.textIcon {
+        position: absolute;
+        top: 36%;
+        left: 27.2%;
+    }
+    
+    div.shareIcon {
+        position: absolute;
+        top: 46.5%;
+        left: 26.5%;
+    }
+    
+    div.beaconIcon {
+        position: absolute;
+        top: 56%;
+        left: 26%;
+    }
+    
+
+.btn {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border: 2px solid #90ee90;
+  border-radius: 2em;
+  color: #90ee90;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+font-weight: 900;
+        font-size: 1.05em;
+  line-height: 1;
+     font-family: 'Comfortaa', sans-serif;
+  margin: 20px;
+  padding: 0.3em 2.7em;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Comfortaa', sans-serif;
+    position: absolute;
+    top: 53.5%;
+    left: 7.2%;
+}
+.btn:hover, .btn:focus {
+  color: #90ee90;
+  outline: 0;
+}   
+    
+.btn2 {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: transparent;
+  border: 2px solid #90ee90;
+  border-radius: 2em;
+  color: #90ee90;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+font-weight: 900;
+        font-size: 1.05em;
+  line-height: 1;
+     font-family: 'Comfortaa', sans-serif;
+  margin: 20px;
+  padding: 0.3em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Comfortaa', sans-serif;
+    position: absolute;
+    top: 58.5%;
+    left: 7.2%;
+}
+.btn:hover, .btn:focus {
+  color: #90ee90;
+  outline: 0;
+}        
+    
+    
+   .fourth {
+  border-color: #90ee90;
+  color: #90ee90;
+  background-image: linear-gradient(120deg, #90ee90 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  transition: background 600ms ease-in-out;
+}
+.fourth:hover {
+  background-position: 0;
 }
     
-    div.myH1 {
-        font-family: Comic Sans MS;
-        color: aliceblue;
-        font-size: 60px;
-        text-align: center;
-        background-color: lightgreen;
-        top: 10%;
-        left: 50%
+   .fourth {
+  border-color: #90ee90;
+  color: #90ee90;
+  background-image: linear-gradient(120deg, #90ee90 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  transition: background 600ms ease-in-out;
 }
+.fourth:hover {
+  background-position: 0;
+    color: ghostwhite;
+}    
+        
+    
+    
+
+    
+    
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+    background-color: grey;
+  height: 100%;
+}
+    
+    
+    
+
+    
+    
+    
+    
+</style>    
 
 
-</style>
-
-    
-<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-<script>
-
-  // Initialize Firebase
-  var config = {
-        apiKey: "AIzaSyCToq81cnSSBKbmXS3cmmgjd7ve9h13gpw",
-        authDomain: "va-social-media.firebaseapp.com",
-        databaseURL: "https://va-social-media.firebaseio.com",
-        projectId: "va-social-media",
-        storageBucket: "va-social-media.appspot.com",
-        messagingSenderId: "211228920799"
-  };
-  firebase.initializeApp(config);
-                
-    
-        // Check to see if you are logged in
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user == null) {
-                alert("Not logged in.");
-                return;
-            } else {
-                userId = user.uid;
-                name = user.displayName;
-                imageUrl = user.photoURL;
-                email = user.email;
-                    
-                // write user data to users
-                writeUserData(userId, name, email, imageUrl);
-                
-                // write data to document
-                mydiv = document.getElementById("mydata");
-                mydiv.innerHTML = name
-                myphotodiv = document.getElementById("myphoto");
-                myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
-                user.sendEmailVerification().then(function() {
-                // Email sent.
-                }).catch(function(error) {
-                // An error happened.
-                });
-                
-                firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
-                    var data = (snapshot.val());
-                    if (data == null) {
-                      console.log("No data found at /tweets" + userId);  
-                    } else {
-                      console.log(data);
-                      /*
-                      console.log(data); 
-                      var mylist = "<ul>";
-                      for (var u in data) {
-                         console.log(data[u]);
-                         for (var t in data[u]) {
-                            console.log(data[u][t].tweet);
-                            mylist = mylist + "<li>" + data[u][t].tweet + "</li>";
-                         } 
-                      }
-                      mylist = mylist + "</ul>";
-                        console.log(mylist);
-                      var mytdiv = document.getElementById("mytweets");
-                      mytdiv.innerHTML = mylist;
-                      */
-                      updatetweets(data);
-                    }
-                });
-            } // end user null check
-        }); // end check auth state
-        
-        // write user data
-        function writeUserData(userId, name, email, imageUrl) {
-            firebase.database().ref('users/' + userId).set({
-                username: name,
-                email: email,
-                profile_picture : imageUrl
-            });
-        }
-           
-    
-        function updatetweets(data) {
-            var mylist = "<ul>";
-            for (var u in data) {
-                var d = new Date(data[u].time);
-                var t = d.toString();
-                mylist = mylist + "<li>" + data[u].tweet + " (" + t + ")</li>";
-            }
-            mylist = mylist + "<ul>";
-            var mytdiv = document.getElementById("mytweets");
-            mytdiv.innerHTML = mylist;
-                
-            }
-        
-        // write tweets to firebase
-        function tweet() {
-            
-            twitdoc = document.getElementById("twit");
-            var nameValue = twitdoc.value;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time});
-            twitdoc.value = "";
-            console.log("tweet written");
-            
-            firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
-                    var data = (snapshot.val());
-                    if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
-                    } else {
-                      updatetweets(data);
-                    }
-                });
-            
-            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
-            
-        }
-        
-        
-        function signin() {
-            console.log("Signing in");
-            var provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithRedirect(provider).then(function(result) {  
-            });
-        }
-        
-        function signout() {
-            console.log("Signing out");
-            firebase.auth().signOut().then(function() {
-            });
-        }
-    
-    </script>    
-    
-    
-    
-</head>
-    
 </html>
