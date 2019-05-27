@@ -19,5 +19,503 @@
     </div>
   </header>
     
+<script>
+        
+        // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA85okZdA9v_XAa9BgJJ2EOdUEbL09k0uY",
+    authDomain: "fir-test-bcb6d.firebaseapp.com",
+    databaseURL: "https://fir-test-bcb6d.firebaseio.com",
+    projectId: "fir-test-bcb6d",
+    storageBucket: "fir-test-bcb6d.appspot.com",
+    messagingSenderId: "976121809263"
+  };
+  firebase.initializeApp(config);
+                
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                alert("Not logged in.");
+                return;
+            } else {
+                userId = user.uid;
+                name = user.displayName;
+                imageUrl = user.photoURL;
+                email = user.email;
+                var user = firebase.auth().currentUser;
+                user.sendEmailVerification().then(function() {
+                // Email sent.
+                }).catch(function(error) {
+                // An error happened.
+                });
+                if (firebase.auth().currentUser.emailVerified) {
+                    alert('Email Verified');
+                    console.log('Email Verified');
+                }
+                    
+                // write user data to users
+                //writeUserData(userId, name, email, imageUrl);
+                // moved to tweet function
+                
+                firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) { 
+                var fakeusername = snapshot.val().username;
+                console.log('/users/' + userId);
+                
+                mydiv = document.getElementById("mydata");
+                mydiv.innerHTML = fakeusername;
+                
+                // write data to document
+                myphotodiv = document.getElementById("myphoto");
+                myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
+                
+                firebase.database().ref('/tweets').once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /tweets/" + userId);  
+                    } else {
+                        
+                      firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                        var userdata = (snapshot.val());
+                        if (userdata != null) {
+                           dataarray = [data,userdata]
+                           console.log(dataarray)
+                           updatetweets(dataarray); 
+                           updatebio();
+                        }
+                      });
+                      //console.log(data)
+                      //updatetweets(data);
+                    }
+                });
+                });
+            } // end user null check
+        }); // end check auth state
+        
+        function encodeImageFileAsURL() {
+            var filesSelected = document.getElementById("inputFileToLoad").files;
+            if (filesSelected.length > 0) {
+                var fileToLoad = filesSelected[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
+                    //var newImage = document.createElement('img');
+                    //newImage.src = srcData;
+                    //document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                    document.getElementById("imgTest").innerHTML = srcData;
+                    //console.log("Converted Base64 version is: " + document.getElementById("imgTest").innerHTML);
+                    //console.log(srcData);
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        } // end function
+        
+        // write user data
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).once('value',    function(snapshot) {
+                 if (!snapshot.exists()) {
+                    firebase.database().ref('users/' + userId).set({
+                        username: name,
+                        email: email,
+                        profile_picture : imageUrl
+                    });  
+                 }                                      
+            });
+        }
+        
+        
+        function updatetweets(data) {
+            var tweetnumber = 0;
+            //var mylist = "<ul>";
+            var mytab = "<table id='tweettable'>";
+            users = data[1]; // put on top, because changed data - not good coding change later
+            data = data[0];
+            
+            for (var u in data) {
+                for (var t in data[u]) {
+                    mytab = mytab + "<tr>";
+                    var time = data[u][t].time;
+                    var date = data[u][t].date;
+                    console.log(users[u].profile_picture);
+                    console.log(users[u].username);
+                    if (data[u][t].img != "") {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'>" + "<br>" + "<br>" + "<button class='" + "seeprofile" + users[u].username + "' id=" + "'seeprofile" + users[u].username + "' onclick='viewprofile(this.id)'>See User's Profile" + "</button>" + "<br>" + "<button class='" + "follow" + users[u].username + "' id=" + "'follow " + users[u].username + "' onclick='follow(this.className)'>Follow This User" + "</button>" + "</td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + "<p>" + time + "</p>" + "<p>" + date + "</p>" + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
+                        mytab = mytab + "<td><p>Like this tweet</p>" + "<button id='" + u + "/" + t + "' onclick=" + "like(this.id)" + ">Like</button>" + "<p>Likes: </p>" + "<p id='" + u + "/" + t + "likes'" + "'>" + data[u][t].likes + "</p>" + "</td>";
+                         
+                    } else {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'>" + "<br>" + "<br>" + "<button class='" + "seeprofile" + users[u].username + "' id=" + "'seeprofile" + users[u].username + "' onclick='viewprofile(this.className)'>See User's Profile" + "</button>" + "<br>" + "<button class='" + "follow" + users[u].username + "' id=" + "'follow " + users[u].username + "' onclick='follow(this.className)'>Follow This User" + "</button>" + "</td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + "<p>" + time + "</p>" + "<p>" + date + "</p>" + "</td>";
+                        mytab = mytab + "<td><p>Like this tweet</p>" + "<button id='" + u + "/" + t + "' onclick=" + "like(this.id)" + ">Like</button>" + "<p>Likes: </p>" + "<p id='" + u + "/" + t + "likes'" + "'>" + data[u][t].likes + "</p>" + "</td>";
+                    } 
+                    mytab = mytab + "</tr>";
+                }   
+            }
+            //mylist = mylist + "</ul>";
+            mytab = mytab + "</table>"
+            var mytdiv = document.getElementById("mytweets");
+            //mytdiv.innerHTML = mylist;
+            mytdiv.innerHTML = mytab;
+        }
+        
+        function updatebio() {
+            firebase.database().ref('/users/' + userId).once('value', function(snapshot) {
+                var bio = snapshot.val().bio;
+                console.log(bio);
+                document.getElementById('mybio').innerHTML = "About Me: " + bio;
+            });
+        }
+        
+        // write tweets to firebase
+        function tweet() {
+            
+            var twitdoc = document.getElementById("twit");
+            var twitimg = document.getElementById("imgTest");
+            var nameValue = twitdoc.value;
+            var imgValue = twitimg.innerHTML;
+            var d = new Date();
+            var dayofweek = d.getDay();
+            console.log(dayofweek);
+            var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var dayofmonth = d.getDate();
+            var monthnumber = d.getMonth();
+            var monthnames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var year = d.getFullYear();
+            var thedate = weekdays[dayofweek] + ", " + monthnames[monthnumber] + " " + dayofmonth + ", " + year;
+            console.log(thedate);
+            var hours = d.getHours();
+            var minutes = d.getMinutes();
+            console.log(hours);
+            console.log(minutes);
+            if (hours <= 12) {
+                if (minutes < 10) {
+                    var time = hours + ":" + "0" + minutes + " AM";
+                    console.log(time);
+                }
+                else var time = hours + ":" + minutes + " AM";
+                console.log(time);
+            }
+            if (hours > 12) {
+                if (minutes < 10) {
+                    var time = (hours - 12) + ":" + "0" + minutes + " PM";
+                    console.log(time);
+                }
+                else var time = (hours - 12) + ":" + minutes + " PM";
+                console.log(time);
+            }
+            /*  if (hours = 0) {
+                if (minutes = 0) {
+                    var time = "12" + ":" + "00" + " AM";
+                }
+                else if (minutes < 10) {
+                    time = "12" + ":" + "0" + minutes + " AM";
+                    console.log(time);
+                }
+                else time = "12" + ":" + minutes + " AM";
+                console.log(time);
+            }
+            if (hours <= 12 && hours > 0) {
+                if (minutes = 0) {
+                    time = hours + ":" + "00" + " AM";
+                }
+                else if (minutes < 10) {
+                    time = hours + ":" + "0" + minutes + " AM";
+                    console.log(time);
+                }
+                else time = hours + ":" + minutes + " AM";
+                console.log(time);
+            }
+            if (hours > 12) {
+                if (minutes = 0) {
+                    time = (hours - 12) + ":" + "00" + " AM";
+                }
+                else if (minutes < 10) {
+                    time = (hours - 12) + ":" + "0" + minutes + " PM";
+                    console.log(time);
+                }
+                else time = (hours - 12) + ":" + minutes + " PM";
+                console.log("Time" + time);
+            } */
+        
+            console.log(hours);
+            console.log(time);
+            var js_time = Date.now();
+            //var numberoffollowers = 2;
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: time, date: thedate, img: imgValue, likes: 0});
+            //var followers = firebase.database().ref('users/' + userId + "/").push({followers: numberoffollowers});
+            twitdoc.value = "";
+            writeUserData(userId, name, email, imageUrl);
+            console.log("tweet written")
+            
+            firebase.database().ref('/tweets').once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /tweets/" + userId);  
+                    } else { 
+                        firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                        var userdata = (snapshot.val());
+                        if (userdata != null) {
+                           dataarray = [data,userdata]
+                           console.log(dataarray)
+                           updatetweets(dataarray); 
+                        }
+                      });
+                    }
+                });
+            
+
+            
+            
+            
+            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
+            
+        }
+        
+        function like(t) {
+            
+            /*firebase.database().ref('tweets/' + t).once('value', function (snapshot) {
+                var likesarezero = snapshot.val().likes;
+                if (likesarezero = 0) {
+                    var golike = true;
+                } else {
+                    
+                
+                firebase.database().ref('tweets/' + t + "/" + 'userswholiked' + "/" + userId).once('value', function(snapshot) {
+                console.log('tweets/' + t + "/" + 'userswholiked' + "/" + userId);
+                var likebool = snapshot.val();
+                console.log(likebool);
+                if (likebool = "true") {
+                    var golike = false;
+                    alert('Already Liked');
+                }
+                else (golike = true);
+                    
+                if (golike) {
+                alert('You liked this tweet');
+                    console.log(t);
+                var y = firebase.database().ref('/tweets/' + t);
+                var parent = y.parent;
+                    console.log('Parent: ' + parent);
+                var res = String(parent);
+                    console.log(res);
+                var goal = res.substring((res.length - 28), res.length);
+                    console.log(goal);
+                        
+                var oldlikes = document.getElementById(t + "likes").innerHTML;
+                    console.log(oldlikes);
+                firebase.database().ref('/tweets/'+ t).once('value', function(snapshot) {
+                    console.log("/tweets/" + t);
+                    console.log(snapshot.val());
+                var oldlikenumber = snapshot.val().likes;
+                    console.log(oldlikenumber);
+                var newlikes = oldlikenumber + 1;
+                var tweetid = firebase.database().ref('tweets/' + t).update({likes: newlikes});
+                var newliker = firebase.database().ref('tweets/' + t + "/" + 'userswholiked' + "/" + userId);
+                var newlikeperson = newliker.push({liked: true});
+                    console.log(newlikes);
+                document.getElementById(t + "likes").innerHTML = newlikes;
+                });
+            }
+        });
+    }
+    }*/
+                    alert('You liked this tweet');
+                    console.log(t);
+                var y = firebase.database().ref('/tweets/' + t);
+                var parent = y.parent;
+                    console.log('Parent: ' + parent);
+                var res = String(parent);
+                    console.log(res);
+                var goal = res.substring((res.length - 28), res.length);
+                    console.log(goal);
+                        
+                var oldlikes = document.getElementById(t + "likes").innerHTML;
+                    console.log(oldlikes);
+                firebase.database().ref('/tweets/'+ t).once('value', function(snapshot) {
+                    console.log("/tweets/" + t);
+                    console.log(snapshot.val());
+                var oldlikenumber = snapshot.val().likes;
+                    console.log(oldlikenumber);
+                var newlikes = oldlikenumber + 1;
+                var tweetid = firebase.database().ref('tweets/' + t).update({likes: newlikes});
+                var likeid = firebase.database().ref('tweets/' + t + "/" + 'userswholiked' + "/" + userId)
+                var newlikeperson = newliker.push({liked: true});
+                    console.log(newlikes);
+                document.getElementById(t + "likes").innerHTML = newlikes;
+                });    
+}
+        
+        function follow(follower) {
+            alert ('follow ' + follower);  
+            document.getElementsByClassName('follow ' + follower).innerHTML = "Unfollow This User";
+        }
+        
+        function signin() {
+            console.log("Signing in");
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("https://vikram-alex-social-media.github.io/FirebaseTest/");
+            });
+        }
+        
+        function signout() {
+            console.log("Signing out");
+            firebase.auth().signOut().then(function() {
+            });
+        }
+        
+        function getnumberofusers() {
+            firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                var numberofusers = snapshot.numChildren();
+                document.getElementById('numberofusers').innerHTML = "Number of Users: " + numberofusers;
+            });
+        }
+        
+        var userArray = [];
+        getallusers();
+        
+        function getallusers() {
+            
+            firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                var numberofusers = snapshot.numChildren();
+                console.log('Number of Current Users: ' + numberofusers);
+                var users = (snapshot.val());
+                    userArray.push(users);
+                    console.log(userArray[0]);
+            });
+            getnumberofusers();
+        }
+        
+        function privatechat() {
+            //var private = firebase.database().ref('privatechat/' + userId + ", " + chatwithId + "/").push({tweet: nameValue, time: time, date: thedate, img: imgValue, likes: 0});
+            alert('This is private chat');
+        }
+        
+        function changeusernameshow() {
+            document.getElementById('newusernameinstruct').style.display = "block";
+            document.getElementById('newusernameinput').style.display = "block";
+            document.getElementById('submitnewusername').style.display = "block";
+            document.getElementById('closenewusername').style.display = "block";
+        }
+        
+        function closeusername() {
+            document.getElementById('newusernameinstruct').style.display = "none";
+            document.getElementById('newusernameinput').style.display = "none";
+            document.getElementById('submitnewusername').style.display = "none";
+            document.getElementById('closenewusername').style.display = "none";
+        }
+        
+        function changeusername() {
+            alert('Changing Username');
+            var newusername = document.getElementById('newusernameinput').value;
+            document.getElementById('mydata').innerHTML = newusername;
+            var updatedusername = firebase.database().ref('users/' + userId).update({username: newusername});
+
+            closeusername();  
+        }
+        
+        function changebioshow() {
+            document.getElementById('newbioinstruct').style.display = "block";
+            document.getElementById('newbioinput').style.display = "block";
+            document.getElementById('submitnewbio').style.display = "block";
+            document.getElementById('closenewbio').style.display = "block";
+        }
+        
+        function closebio() {
+            document.getElementById('newbioinstruct').style.display = "none";
+            document.getElementById('newbioinput').style.display = "none";
+            document.getElementById('submitnewbio').style.display = "none";
+            document.getElementById('closenewbio').style.display = "none";
+        }
+        
+        function changebio() {
+            alert('Changing Bio');
+            var newbio = document.getElementById('newbioinput').value;
+            document.getElementById('mybio').innerHTML = "About Me: " + newbio;
+            var updatedusername = firebase.database().ref('users/' + userId).update({bio: newbio});
+
+            closebio();  
+        }
+        
+        
+        
+        
+        
+        
+    
+    </script>
+
+    <body>
+        <button onclick="signin()">Sign in</button>
+        <button onclick="signout()">Sign out</button>
+        
+        <br>
+    
+        <form>
+            Tweet:<br>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4"></textarea>
+        </form> 
+        <button type="button" onclick="tweet()">Submit</button>
+        <br>
+        <br>
+        <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
+        <div id="imgTest" style="display:none;"></div>
+        <br>
+    <div id="mytweets"></div>
+    <br>
+    <div id="mydata"></div>
+        
+        <br>
+        <button id="changeusernameshow" onclick='changeusernameshow()'>Change Username</button>
+        <br>
+        <p class="ifchangeusername" id="newusernameinstruct" style="display: none;">Enter New Username:</p>
+        <br>
+        <input class="ifchangeusername" type="text" id="newusernameinput" type="text" name="newusername" value="" placeholder="New Username ..." style="display: none;">
+        <br>
+        <button class="ifchangeusername" id="submitnewusername" style="display: none;" onclick="changeusername();">Submit</button>
+        <br>
+        <button class="ifchangeusername" id="closenewusername" style="display: none;" onclick="closeusername();">Close</button>
+        <br>
+        
+        <p id="mybio">About Me:</p>
+        
+        <br>
+        <button id="changebioshow" onclick='changebioshow()'>Change Bio</button>
+        <br>
+        <p id="newbioinstruct" style="display: none;">Enter New Biography</p>
+        <br>
+        <input type="text" id="newbioinput" type="text" name="newusername" value="" placeholder="New Bio ..." style="display: none;">
+        <br>
+        <button id="submitnewbio" style="display: none;" onclick="changebio();">Submit</button>
+        <br>
+        <button id="closenewbio" style="display: none;" onclick="closebio();">Close</button>
+        <br>
+        
+        
+        
+        
+    <div id="myphoto"></div>
+    <br>
+    <div id="myprofileinfo"></div>
+    <br>
+    <p id="numberofusers"></p>
+    <br>
+    <div style="width:300px;">
+        <input id="myInput" type="text" name="myCountry" placeholder="Search a User!">
+    </div>
+        
+        
+        
+        
+    </body>
+
+    
+
+    
+</html>
+    
     
 </html> 
