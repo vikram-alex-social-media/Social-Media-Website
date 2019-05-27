@@ -1,0 +1,143 @@
+<html>
+
+<head>
+	 <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700&display=swap" rel="stylesheet">
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>QuikChat</title>
+        <meta name="description" content="Communicate with friends, family, or anyone else quickly using QuikChat" />
+        <meta name="keywords" content="Quikchat, communicate, talk, video, chat, quick, social media" />
+        <meta name="author" content="RB Technology" />
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700&display=swap" rel="stylesheet">
+        <link href="StyleSheet.css" rel="stylesheet" type="text/css">
+</head>
+    
+<body>
+    
+     <img class="imgWhiteLogo" src="WhiteLogo.png">
+    
+    <header>
+    <div class="container">
+      <h1 class="logo"></h1>
+    
+
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="Profile.html">Profile</a></li>
+          <li><a href="Discover.html">Discover</a></li>
+          <li><a href="Collective.html">Collective</a></li>
+          <li><a href="Video.html">Video</a></li>
+          <li><a href="Private.html">Private</a></li>
+            <li><a href="Employment.html">Employment</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+    <h2 class="OtherTitle P61LU"><span class="typingV"></span></h2>
+    
+    <script src="jquery.2.min.js"></script>
+    <script src="typed.min.js"></script>
+    <script type="text/javascript">
+        var typed = new Typed('.typingV', {
+            strings: ["VideoChat:", "talk with anyone", "friends", "family", "collegues", "teammates", "anyone!"], 
+            loop: true,
+            typeSpeed: 15,
+            backSpeed: 10,
+            backDelay: 1200,
+            
+        });
+    </script>
+    
+    <p class="VideoDesc P62LC">Use Video Chat to have more personal interactions with anyone, anywhere, whenever you want. Copy your URL using the left button, and send it to your desired user using the right button.</p>
+    
+    
+<input type="hidden" id="input-url" value="URL has been copied!">
+    <button class="btn fourth posleft">Copy my URL</button>
+
+<a class="js-emaillink" href="mailto:yourfriendsemail@here.com?&subject=Invite to join my Video Chat on QuikChat.ca&body=Hey Friend,%0d%0a%0d%0aCome and join me on a Video Chat by clicking this link: (Paste your link here!)%0d%0a%0d%0aSee you there!">
+        <button class="btn fourth posright">Send to a friend</button>
+    </a>    
+    
+  <video id="localVideo" autoplay muted></video>
+  <video id="remoteVideo" autoplay></video>
+  <script src="videoJs.js"></script>
+    
+</body>
+    
+    <style>
+    video {
+        width: 40%; 
+        margin: 0 50px;
+        box-sizing: border-box;
+        border-radius: 2em;
+        padding: 0;
+        border: 3px solid #90ee90;
+        box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;
+	    background: transparent;
+    }
+      
+      #localVideo {
+          position: absolute;
+          top: 37%;
+          left: 3.1%;
+      }
+      
+        #remoteVideo {
+          position: absolute;
+          top: 37%;
+          left: 50%;
+      }
+    
+    
+    .copy {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 6em;
+      color: rgba(0, 0, 0, 0.5);
+    }
+      
+          .posleft {
+              position: absolute;
+          top: 75%;
+          left: 17%;
+      }
+      
+      .posright {
+          position: absolute;
+          top: 75%;
+          left: 63.9%;
+      }
+        
+            .P61LU{
+        position: absolute;
+        top: 12%;
+        left: 4%;
+    }
+
+.P62LC {
+    position: absolute;
+    top: 18%;
+    left: 4%;
+}
+        
+        .VideoDesc {
+        font-size: 1.2em;
+        font-weight: 700;
+        width: 70%;
+        height: 20%;
+    }
+        
+        p {
+            font-weight: 700;
+        }
+        
+    
+    
+    </style>
+</html>

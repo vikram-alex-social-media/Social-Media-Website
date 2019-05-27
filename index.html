@@ -1,267 +1,185 @@
 
 <html>
 
+<head>
+	 <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700&display=swap" rel="stylesheet">
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>QuikChat</title>
+        <meta name="description" content="Communicate with friends, family, or anyone else quickly using QuikChat" />
+        <meta name="keywords" content="Quikchat, communicate, talk, video, chat, quick, social media" />
+        <meta name="author" content="RB Technology" />
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700&display=swap" rel="stylesheet">
+        <link href="StyleSheet.css" rel="stylesheet" type="text/css">
+</head>
+    
 <body>
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Comfortaa|Nunito+Sans" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Sign up | QuikChat</title>
-    </head>   
-    
-<div class="rightSide">
-    <div class="myLogo"><img src="BlankQCLogo.png" width="250" height="140.6" alt="Blank Q"></div>
-    
-    <div class="mainDescription">Communicate with friends, family, or anyone else quickly using QuikChat</div>
-
-    <div class="joinToday">Join QuikChat today.</div>
-    
-    <a href="home.html">
-        <button class="btn fourth">Sign in with Google</button>
-    </a>
-        
-    
-    <a href="https://accounts.google.com/signup">
-        <button class="btn2 fourth">Create an account</button>
-    </a>
-
-    </div>
-
-    
-    <div class="myLogo">
-        <img src="BlankQCLogo.png" alt="Land" style="width:100%">
-    </div> 
-    
-<div class="leftSide">
-    <div class="leftPoints">
-        <p>Chat with a friend or in groups</p><br><p>Share what's new</p><br><p>Stay in touch all the time</p><br>
-    </div>
-    
-    <div class="leftLogo">
-        <img src="HRQCL.svg" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:100%">
-    </div>
-    
-    <div class="textIcon">
-        <img src="textIcon.png" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:9%">
-    </div>
-    
-     <div class="shareIcon">
-        <img src="shareIcon.png" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:9%">
-    </div>
-    
-     <div class="beaconIcon">
-        <img src="beaconIcon.png" alt="Well_a_picture_was_supposed_to_load_here.jpg" style="width:9%">
-    </div>
-    
-    </div>
-
-
-
-  
-    
-</body>
-    
-
-    
-    
-<style>
-    
-    @import url('https://fonts.googleapis.com/css?family=Comfortaa:400,500,600,700|Nunito+Sans:400,600,700,800,900');
-    
-    div.rightSide {
-        background-color: ghostwhite;
-        width: 50%;
-        height: 100%;
-        position: absolute;
-        top: 0%;
-        left: 50%;
-    }
-    
-    div.leftSide {
-        background-color: #ADFBC9;
-        width: 50%;
-        height: 100%;
-        position: absolute;
-        top: 0%;
-        left: 0%;
-    }
      
+<!-- START - Loader    
     
-    div.leftPoints {
-        color: white;
-        font-family: 'Comfortaa', sans-serif;
-        text-align: left;
-        font-weight: 700;
-        font-size: 1.3em;
-        font-weight: 600;
-        position: absolute;
-        top: 50%;
-        left: 53%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-    }
+    <div class="wrap"> 
+        <div class="loading">
+            <div class="bounceball"></div>
+                <div class="loadingText">Loading QuikChat.ca</div>
+            </div>
+    </div>
     
+ END - Loader --> 
     
-    br {
-        line-height: -500px;
-    }
+<!-- START - HOME -->       
     
-    div.joinToday {
-        color: #90ee90;
-        font-family: 'Comfortaa', sans-serif;
-        text-align: left;
-        font-weight: 900;
-        font-size: 1.3em;
-        position: absolute;
-        top: 51.5%;
-        left: 10%;
-    }
+     <img class="imgWhiteLogo" src="WhiteLogo.png">
     
-    div.mainDescription {
-        color: black;
-        font-family: 'Comfortaa', sans-serif;
-        text-align: left;
-        font-weight: 600;
-        font-size: 1.7em;
-        width: 80%;
-        position: absolute;
-        top: 35%;
-        left: 10%;
-    }
-    
-    
-    div.myLogo {
-        width: 1%;
-        position: absolute;
-        top: 23%;
-        left: 6.1%;
-    }
-    
-    div.leftLogo {
-        width: 135%;
-        position: absolute;
-        top: 22.65%;
-        left: -30%;
-    }
-    
-    div.textIcon {
-        position: absolute;
-        top: 36%;
-        left: 27.2%;
-    }
-    
-    div.shareIcon {
-        position: absolute;
-        top: 46.2%;
-        left: 26.35%;
-    }
-    
-    div.beaconIcon {
-        position: absolute;
-        top: 56%;
-        left: 26%;
-    }
+    <header>
+    <div class="container">
+      <h1 class="logo"></h1>
     
 
-.btn {
-  box-sizing: border-box;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-color: transparent;
-  border: 2px solid #90ee90;
-  border-radius: 2em;
-  color: #90ee90;
-  cursor: pointer;
-  display: flex;
-  align-self: center;
-font-weight: 900;
-        font-size: 1.05em;
-  line-height: 1;
-     font-family: 'Comfortaa', sans-serif;
-  margin: 20px;
-  padding: 0.3em 2.7em;
-  text-decoration: none;
-  text-align: center;
-  font-family: 'Comfortaa', sans-serif;
-    position: absolute;
-    top: 53.5%;
-    left: 7.2%;
-}
-.btn:hover, .btn:focus {
-  color: #90ee90;
-  outline: 0;
-}   
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="discover.html">Discover</a></li>
+          <li><a href="collective.html">Collective</a></li>
+          <li><a href="video.html">Video</a></li>
+          <li><a href="private.html">Private</a></li>
+          <li><a href="employment.html">Employment</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
     
-.btn2 {
-  box-sizing: border-box;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-color: transparent;
-  border: 2px solid #90ee90;
-  border-radius: 2em;
-  color: #90ee90;
-  cursor: pointer;
-  display: flex;
-  align-self: center;
-font-weight: 900;
-        font-size: 1.05em;
-  line-height: 1;
-     font-family: 'Comfortaa', sans-serif;
-  margin: 20px;
-  padding: 0.3em 2.8em;
-  text-decoration: none;
-  text-align: center;
-  font-family: 'Comfortaa', sans-serif;
-    position: absolute;
-    top: 58.5%;
-    left: 7.2%;
-}
-.btn:hover, .btn:focus {
-  color: #90ee90;
-  outline: 0;
-}        
+    <h1 class="HomeTitle P11LU"><span class="typing"></span></h1>
     
+    <h2 class="HomeDesc P12LU">QuikChat.ca is revolutionizing the communication industry by providing everyone, everywhere the ability to connect to anyone through a <br> multitude of platforms. </h2>
     
-   .fourth {
-  border-color: #90ee90;
-  color: #90ee90;
-  background-image: linear-gradient(120deg, #90ee90 50%, transparent 50%);
-  background-position: 100%;
-  background-size: 400%;
-  transition: background 600ms ease-in-out;
-}
-.fourth:hover {
-  background-position: 0;
-}
+    <img class="imgHome P14RU" src="homePic1.png">
     
-   .fourth {
-  border-color: #90ee90;
-  color: #90ee90;
-  background-image: linear-gradient(120deg, #90ee90 50%, transparent 50%);
-  background-position: 100%;
-  background-size: 400%;
-  transition: background 600ms ease-in-out;
-}
-.fourth:hover {
-  background-position: 0;
-    color: #f8f7ff;
-}    
+    <script src="jquery.2.min.js"></script>
+    <script src="typed.min.js"></script>
+    <script type="text/javascript">
+        var typed = new Typed('.typing', {
+            strings: ["A communication revolution", "brought to you by. . .", "QuikChat.ca"], 
+            loop: true,
+            typeSpeed: 30,
+            backSpeed: 20,
+            backDelay:1300,
+            
+        });
+    </script>
+    
+    <div class="HomeText P13LD"> <!-- WHAT -->
+        <img class="imgMagGlass" src="magGlass.png" alt="oops, image didn't load ;("> 
+        <h1 class="BoxTitle">What is QuikChat?</h1>
+        <p class="BoxText">QuikChat is a platform that is designed to facilitate and accelerate communcication between friends, family, or anyone else throuhg a variety of methods of interaction.</p>
+    </div>
+    
+    <div class="HomeText P13MD"> <!-- HOW -->
+        <img class="imgCogWheel" src="cogWheel.png" alt="oops, image didn't load ;(">
+        <h1 class="BoxTitle">How to use Quikchat</h1>
+        <p class="BoxText">QuikChat has a plethora of sites to visit; navigate them by using the three-lined button that resides in the top left corner of the screen.</p>
+    </div>
+    
+    <div class="HomeText P13RD"> <!-- ABOUT -->
+        <img class="imgPeople" src="people.png" alt="oops, image didn't load ;(">
+        <h1 class="BoxTitle">About us</h1>
+        <p class="BoxText">QuikChat is a student-run technology startup founded by Alex Bastin and Vikram Rawal. QuikChat was created to fill the gap in the communcation market in computers. </p>
+    </div>
+    
+    <h3 class="HomeSub P12LD">Try out one of our most popular  <br> interaction channels</h3>
+    
+    <a href="Video.html">
+        <button class="btn fourth P16LC">Video Chat</button>
+    </a>
+    
+    <a href="Collective.html">
+        <button class="btn fourth P16LD">Collective Chat</button>
+    </a>
+    
+<!-- END - HOME -->  
+</body>
         
+<script>
+    
+   
     
     
+/* START - Loading Animation
+    
+    window.addEventListener("load", function(){
+	var wrap = document.getElementById("wrap");
+	document.body.removeChild(wrap);
+});
+    
+    
+    (function ($) {
 
+  var divs = {
+    'ball-pulse': 3,
+    'ball-grid-pulse': 9,
+    'ball-clip-rotate': 1,
+    'ball-clip-rotate-pulse': 2,
+    'square-spin': 1,
+    'ball-clip-rotate-multiple': 2,
+    'ball-pulse-rise': 5,
+    'ball-rotate': 1,
+    'cube-transition': 2,
+    'ball-zig-zag': 2,
+    'ball-zig-zag-deflect': 2,
+    'ball-triangle-path': 3,
+    'ball-scale': 1,
+    'line-scale': 5,
+    'line-scale-party': 4,
+    'ball-scale-multiple': 3,
+    'ball-pulse-sync': 3,
+    'ball-beat': 3,
+    'line-scale-pulse-out': 5,
+    'line-scale-pulse-out-rapid': 5,
+    'ball-scale-ripple': 1,
+    'ball-scale-ripple-multiple': 3,
+    'ball-spin-fade-loader': 8,
+    'line-spin-fade-loader': 8,
+    'triangle-skew-spin': 1,
+    'pacman': 5,
+    'ball-grid-beat': 9,
+    'semi-circle-spin': 1,
+    'ball-scale-random': 3
+  };
+
+  var addDivs = function(n) {
+    var arr = [];
+    for (i = 1; i <= n; i++) {
+      arr.push('<div></div>');
+    }
+    return arr;
+  };
+
+  $.fn.loaders = function() {
+    return this.each(function() {
+      var elem = $(this);
+      $.each(divs, function(key, value) {
+        if (elem.hasClass(key))
+          elem.html(addDivs(value))
+      })
+    });
+  };
+
+  $(function() {
+    $.each(divs, function(key, value) {
+      $('.loader-inner.' + key).html(addDivs(value));
+    })
+  });
+
+}).call(window, window.$ || window.jQuery || window.Zepto);
     
     
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-    background-color: grey;
-  height: 100%;
-}  
-</style>    
-
-
+    END - Loading Animation */
+    
+    
+    
+</script>    
+    
+    
 </html>
